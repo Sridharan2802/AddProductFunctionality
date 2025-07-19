@@ -15,6 +15,9 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getInitDetails from '@salesforce/apex/AddNewProductCustomController.getInitDetails';
 import saveProducts from '@salesforce/apex/AddNewProductCustomController.saveProducts';
 
+import { loadStyle } from 'lightning/platformResourceLoader';
+import modalOverride from '@salesforce/resourceUrl/ModalOverride';
+
 // Table 1 Columns
 const COLUMN_PAGE1 = [
     {
@@ -140,6 +143,7 @@ export default class AddNewProductCustom extends NavigationMixin(LightningElemen
     filteredProductList = [];
     allProductList = []; // Acts as a backup list
     selectedProductIds = []; // Holds selected product Ids
+    isSRLoaded = false; // Flag to check if the Static Resource is loaded or not
 
     // To read the recordId from the URL for Custom Action Button
     @wire(CurrentPageReference)
@@ -149,6 +153,20 @@ export default class AddNewProductCustom extends NavigationMixin(LightningElemen
             console.log('recordId from URL:', this.recordId);
             this.loadInitialData();
         }
+    }
+
+    renderedCallback() {
+        if(this.isSRLoaded) {
+            return;
+        }
+        loadStyle(this, modalOverride)
+        .then(() => {
+            console.log('Modal style loaded Sucecssfully');
+            this.isSRLoaded = true;
+        })
+        .catch(error => {
+            console.error('Failed to load modal style', error);
+        });
     }
 
     // Fecth initial data when the component is loaded with the PriceBook details and Product list
@@ -338,7 +356,7 @@ export default class AddNewProductCustom extends NavigationMixin(LightningElemen
                 })
                 .catch(error => {
                     const errorMsg = error?.body?.message || error?.message || 'Unknown error occurred';
-                    this.showToastMethod('Error adding products',errorMsg,'error');
+                    this.showToastMethod('Error',errorMsg,'error');
                     this.closeModal();
                 });
         } else {
