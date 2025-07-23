@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>addprod_AddProd</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_AddProd</shortDescription>
+        <value>Add Products</value>
+    </labels>
+    <labels>
+        <fullName>addprod_Back</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_Back</shortDescription>
+        <value>Back</value>
+    </labels>
+    <labels>
+        <fullName>addprod_BackRes</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_BackRes</shortDescription>
+        <value>Back to Result</value>
+    </labels>
+    <labels>
+        <fullName>addprod_Cancel</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>addprod_ChoosePBMsg</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_ChoosePBMsg</shortDescription>
+        <value>Select a Price Book to associate with this opportunity. You can add products only from the Price Book you associate with this opportunity. Changing the Price Book deletes all products from the opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>addprod_ChoosePBTitle</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_ChoosePBTitle</shortDescription>
+        <value>Choose Price Book</value>
+    </labels>
+    <labels>
+        <fullName>addprod_EditSelected</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_EditSelected</shortDescription>
+        <value>Edit Selected Products</value>
+    </labels>
+    <labels>
+        <fullName>addprod_ErrorMsg</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_ErrorMsg</shortDescription>
+        <value>Kindly select a PriceBook.</value>
+    </labels>
+    <labels>
+        <fullName>addprod_Next</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_Next</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>addprod_PBPlaceHolder</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_PBPlaceHolder</shortDescription>
+        <value>Search Price Book..</value>
+    </labels>
+    <labels>
+        <fullName>addprod_PriceBook</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_PriceBook</shortDescription>
+        <value>Price Book:</value>
+    </labels>
+    <labels>
+        <fullName>addprod_Save</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>addprod_ShowSel</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_ShowSel</shortDescription>
+        <value>Show Selected</value>
+    </labels>
+    <labels>
+        <fullName>addprod_SuccessMsg</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_SuccessMsg</shortDescription>
+        <value>Products added successfully</value>
+    </labels>
+    <labels>
+        <fullName>addprod_SuccessMsg2</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_SuccessMsg2</shortDescription>
+        <value>Price Book Id has been updated successfully.</value>
+    </labels>
+    <labels>
+        <fullName>addprod_ValMsg1</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_ValMsg1</shortDescription>
+        <value>Total Quantity is zero. This product cannot be added.</value>
+    </labels>
+    <labels>
+        <fullName>addprod_ValMsg2</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_ValMsg2</shortDescription>
+        <value>Quantity cannot be 0. Please enter a value up to the Total Quantity available.</value>
+    </labels>
+    <labels>
+        <fullName>addprod_ValMsg3</fullName>
+        <categories>Add New Product Custom</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addprod_ValMsg3</shortDescription>
+        <value>Selected quantity exceeds Total Quantity available.</value>
+    </labels>
+</CustomLabels>
