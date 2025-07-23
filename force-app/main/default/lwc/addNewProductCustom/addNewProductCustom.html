@@ -1,82 +1,105 @@
 <template>
-    <header class="slds-modal__header">
-      <template if:true={isFirstPage}>
-        <h2 class="slds-text-heading_medium slds-hyphenate">Add Products</h2>
-        <h3>Price Book: {priceBookName}</h3>
-      </template>
-
-      <template if:false={isFirstPage}>
-        <h2 class="slds-text-heading_medium">Edit Selected Products</h2>
-      </template>
-    </header>
-
-    <div class="slds-modal__content slds-p-around_medium">
-      <!-- First Page Content -->
-      <template if:true={isFirstPage}>
-        <div class="slds-grid slds-gutters slds-p-around_xxx-small">
-          <div class="slds-col" style="width: 100%">
-            <c-custom-product-lookup 
-              pb-id={priceBookId}
-              onproductsearch={handleProductSearch} 
-              onclearproduct={handleClearProduct}>
-            </c-custom-product-lookup>
+  <template if:true={isLoading}>
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+  </template>
+  <template if:false={isLoading}>
+    <template if:false={isOpptyPBIdSet}>
+      <header class="slds-modal__header">
+        <h2 class="slds-text-heading_medium slds-hyphenate">{label.choosePBTitle}</h2>
+      </header>
+      <div class="slds-modal__content slds-p-around_medium">
+        <h3>
+          {label.choosePBMsg}
+        </h3>
+        <lightning-record-picker
+          object-api-name="Pricebook2"
+          label="Price Book"
+          placeholder={label.pbPlaceHolder}
+          required=true
+          filter={pbFilter}
+          value={defaultPriceBookId}
+          onchange={handlePBIdChange}>
+        </lightning-record-picker>
+      </div>
+      <footer class="slds-modal__footer">
+        <button class="slds-button slds-button_neutral" onclick={closeModal}>{label.cancel}</button>
+        <button class="slds-button slds-button_brand" onclick={handlePBSave}>{label.save}</button>
+      </footer>
+    </template>
+    <template if:true={isOpptyPBIdSet}>
+      <header class="slds-modal__header">
+        <template if:true={isFirstPage}>
+          <h2 class="slds-text-heading_medium slds-hyphenate">{label.addProducts}</h2>
+          <br/>
+          <h3>{label.priceBook} {priceBookName }</h3>
+        </template>
+        <template if:false={isFirstPage}>
+          <h2 class="slds-text-heading_medium">{label.editSelectedProducts}</h2>
+        </template>
+      </header>
+      <div class="slds-modal__content slds-p-around_medium">
+        <!-- First Page Content -->
+        <template if:true={isFirstPage}>
+          <div class="slds-grid slds-gutters slds-p-around_xxx-small">
+            <div class="slds-col" style="width: 100%">
+              <c-custom-product-lookup 
+                pb-id={priceBookId}
+                onproductsearch={handleProductSearch} 
+                onclearproduct={handleClearProduct}>
+              </c-custom-product-lookup>
+            </div>
           </div>
-        </div>
-
-        <div class="slds-grid slds-grid_vertical slds-m-vertical_x-small">
-          <a if:true={showViewAll} onclick={handleViewAll} class="slds-p-around_xx-small">
-            Back to Result
-          </a>
-          <a if:true={showSelected} onclick={handleShowSelected} class="slds-p-around_xx-small">
-            Show Selected ({selectedRecordCount})
-          </a>
-        </div>
-        <div class="slds-scrollable" style="height: 15rem; overflow: auto;">
-          <div style="min-width: 100%; display: inline-block;">
-            <lightning-datatable
-              key-field="Id"
-              data={showTableData}
-              columns={columnPage1}
-              selected-rows={selectedProductIds}
-              onrowselection={handleSelectedProduct}
-              max-row-selection="100">
-            </lightning-datatable>
+          <div class="slds-grid slds-grid_vertical slds-m-vertical_x-small">
+            <a if:true={showViewAll} onclick={handleViewAll} class="slds-p-around_xx-small">
+              {label.backToResult}
+            </a>
+            <a if:true={showSelected} onclick={handleShowSelected} class="slds-p-around_xx-small">
+              {label.showSelected} ({selectedRecordCount})
+            </a>
           </div>
-        </div>
-      </template>
-
-      <!-- Second Page Content -->
-      <template if:true={isSecondPage}>
-        <div class="slds-scrollable" style="height: 15rem; overflow: auto;">
-          <div style="min-width: 100%; display: inline-block;">
-            <lightning-datatable
-              key-field="Id"
-              data={selectedProductData}
-              columns={columnPage2}
-              selected-rows={selectedProductIds}
-              onrowaction={handleRowAction}
-              max-row-selection="100"
-              hide-checkbox-column
-              suppress-bottom-bar>
-            </lightning-datatable>
+          <div class="slds-scrollable" style="height: 15rem; overflow: auto;">
+            <div style="min-width: 100%; display: inline-block;">
+              <lightning-datatable
+                key-field="Id"
+                data={showTableData}
+                columns={columnPage1}
+                selected-rows={selectedProductIds}
+                onrowselection={handleSelectedProduct}
+                max-row-selection="100">
+              </lightning-datatable>
+            </div>
           </div>
-        </div>
-      </template>
-    </div>
-
-    <footer class="slds-modal__footer">
-      <template if:false={isFirstPage}>
-        <button class="slds-button slds-button_neutral slds-float_left" onclick={handleback}>Back</button>
-      </template>
-
-      <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
-
-      <template if:true={isFirstPage}>
-        <button class="slds-button slds-button_brand" onclick={handleNext} disabled={disableNext}>Next</button>
-      </template>
-
-      <template if:false={isFirstPage}>
-        <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
-      </template>
-    </footer>
+        </template>
+        <!-- Second Page Content -->
+        <template if:true={isSecondPage}>
+          <div class="slds-scrollable" style="height: 15rem; overflow: auto;">
+            <div style="min-width: 100%; display: inline-block;">
+              <lightning-datatable
+                key-field="Id"
+                data={selectedProductData}
+                columns={columnPage2}
+                selected-rows={selectedProductIds}
+                onrowaction={handleRowAction}
+                max-row-selection="100"
+                hide-checkbox-column
+                suppress-bottom-bar>
+              </lightning-datatable>
+            </div>
+          </div>
+        </template>
+      </div>
+      <footer class="slds-modal__footer">
+        <template if:false={isFirstPage}>
+          <button class="slds-button slds-button_neutral slds-float_left" onclick={handleback}>{label.back}</button>
+        </template>
+        <button class="slds-button slds-button_neutral" onclick={closeModal}>{label.cancel}</button>
+        <template if:true={isFirstPage}>
+          <button class="slds-button slds-button_brand" onclick={handleNext} disabled={disableNext}>{label.next}</button>
+        </template>
+        <template if:false={isFirstPage}>
+          <button class="slds-button slds-button_brand" onclick={handleSave}>{label.save}</button>
+        </template>
+      </footer>
+    </template>
+  </template>
 </template>
